@@ -8,6 +8,9 @@ class InMemoryDeviceRepository(DeviceRepository):
     def __init__(self):
         self.devices = {}
 
+    def get_devices(self):
+        return self.devices
+
     def find_by_mac_address(self, mac_address: str):
         for device in self.devices.values():
             if device.get_mac_address() == mac_address:

@@ -22,3 +22,6 @@ class DeviceService:
         self.device_repository.save(device)
 
         return str(device.get_device_id())
+    
+    def get_devices(self) -> dict:
+        return self.device_repository.get_devices()

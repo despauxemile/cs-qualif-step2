@@ -4,6 +4,7 @@ import hashlib
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
+from cs_qualif_step2.core.application import device_service
 from cs_qualif_step2.core.application.dto.device_config import DeviceConfig
 from cs_qualif_step2.config.get_device_service import get_device_service
 from cs_qualif_step2.core.api.dto.request.register_device_request import DeviceRegistrationRequest
@@ -34,4 +35,16 @@ def register_device(
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content={"device_id": device_id}
+    )
+
+@device_router.get("")
+def get_devices(device_service: DeviceService = Depends(get_device_service)):
+    devices = device_service.get_devices()
+    ls = [ d for d in devices.items() ]
+
+    res = {"devices": ls}
+
+    return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content=res
     )

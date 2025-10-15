@@ -14,3 +14,7 @@ class DeviceRepository(ABC):
     @abstractmethod
     def save(self, device: Device):
         pass
+
+    @abstractmethod
+    def get_devices(self) -> dict:
+        pass
